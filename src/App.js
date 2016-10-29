@@ -6,22 +6,25 @@ import Dropzone from 'react-dropzone';
 import './styles/App.css';
 
 const storageRef = storage.ref()
-console.log('storage ref', storageRef)
-const imageRef = storageRef.child('homepage/IMG_1097.JPG');
-console.log('image ref', imageRef);
 
 class App extends Component {
   handleSubmit(e) {
     e.preventDefault()
-    var input = this.refs.input.value
-    console.log(input)
+    var file = this.imageUpload.files[0]
+    var imageRef = storageRef.child(file.name)
+    imageRef.put(file).then(function(snapshot) {
+    var url = snapshot.a.downloadURLs[0]
+    });
+    console.log('file', file)
   }
+
+
   render() {
     return (
       <div className="App">
         <Header />
         <form>
-          <input ref='input' type='file' name='image-file' />
+          <input ref={(ref) => this.imageUpload = ref} type='file' name='image-file' />
           <input onClick={this.handleSubmit.bind(this)} type='submit' />
         </form>
       </div>
