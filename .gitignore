@@ -1,0 +1,4 @@
+node_modules
+src/firebase.js
+*.zip
+.DS_Store
