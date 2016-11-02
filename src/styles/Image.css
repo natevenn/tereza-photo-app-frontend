@@ -1,0 +1,13 @@
+.img-div {
+  display: inline-block;
+  border: 1px solid #ECEDE8;
+  margin: 30px 30px;
+  overflow: hidden;
+  height: 300px;
+  width: 300px;
+  vertical-align: top;
+}
+
+.img {
+  max-height: 100%;
+}
