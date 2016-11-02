@@ -14,6 +14,9 @@ export default class App extends Component {
     this.state = {
       images: []
     }
+
+    this.addImage = this.addImage.bind(this);
+
   }
 
   componentWillMount() {
@@ -23,11 +26,16 @@ export default class App extends Component {
     })
   }
 
+  addImage(key, url) {
+    this.state.images[key] = { imageUrl: url }
+    this.setState({images: this.state.images})
+  }
+
   render() {
     return (
       <div className="App">
         <Header />
-        <UploadImage />
+        <UploadImage addImage={this.addImage}/>
         <Pictures images={this.state.images}/>
       </div>
     );

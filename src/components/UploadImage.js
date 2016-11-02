@@ -18,18 +18,14 @@ export default class UploadImage extends Component {
     var group = this.groupName.value
     var imageRef = storageRef.child(file.name)
     var dbRef = database.ref('pictures/' + group )
-    imageRef.put(file).then(function(snapshot) {
+    imageRef.put(file).then((snapshot) => {
       var url = snapshot.a.downloadURLs[0]
       var newImageRef = dbRef.push()
+      var newImageRefKey = dbRef.push().key
       newImageRef.set({
         imageUrl: url
       })
-    })
-
-    dbRef.once('value', (snapshot) => {
-      if(snapshot.val() !== null) {
-        this.setState({ imageUrl: snapshot.val().imageUrl })
-      }
+      this.props.addImage(newImageRefKey, url)
     })
 
     this.imageUpload.value = ""
@@ -49,9 +45,6 @@ export default class UploadImage extends Component {
           </select>
           <input onClick={this.handleSubmit.bind(this)} type='submit' />
         </form>
-        <div className="image-div">
-          <img className="img" src={this.state.imageUrl} alt="" />
-        </div>
       </div>
     )
   }
