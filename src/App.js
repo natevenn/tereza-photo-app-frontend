@@ -20,7 +20,9 @@ export default class App extends Component {
   }
 
   componentWillMount() {
-    var dbRef = database.ref('pictures/places')
+    let params = this.props.pathname
+    console.log('params', params)
+    let dbRef = database.ref('pictures' + params)
     dbRef.once('value').then((snapshot) => {
       this.setState({images: snapshot.val()})
     })
@@ -35,7 +37,6 @@ export default class App extends Component {
     return (
       <div className="App">
         <Header />
-        <UploadImage addImage={this.addImage}/>
         <Pictures images={this.state.images}/>
       </div>
     );
