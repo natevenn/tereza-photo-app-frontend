@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router';
 import '../styles/Header.css';
+import watermark from '../styles/images/t-watermark3.png'
 
 export default class Header extends Component {
   render() {
     return (
       <div className="Header">
-        <h1 className="header-logo">T Photography</h1>
+        <img src={watermark} className="header-logo" />
         <div className="navbar">
           <ul>
             <li className="collection">
