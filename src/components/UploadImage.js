@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import fb from '../firebase';
+import Header from './Header';
+import '../styles/admin.css';
 
 const storageRef = fb.storage().ref();
 const database = fb.database();
 
 export default class UploadImage extends Component {
-  constructor() {
-    super()
-    this.state = {
-      imageUrl: ''
-    }
-  }
 
   handleSubmit(e) {
     e.preventDefault()
@@ -25,7 +21,7 @@ export default class UploadImage extends Component {
       newImageRef.set({
         imageUrl: url
       })
-      this.props.addImage(newImageRefKey, url)
+      //this.props.addImage(newImageRefKey, url)
     })
 
     this.imageUpload.value = ""
@@ -35,7 +31,8 @@ export default class UploadImage extends Component {
   render() {
     return (
       <div>
-        <form>
+        <Header />
+        <form className="upload-form">
           <input ref={(ref) => this.imageUpload = ref} type='file' name='image-file' />
           <select ref={(ref) => this.groupName = ref} name="group-drop-down">
             <option disabled={true} selected>Select a picture group</option>

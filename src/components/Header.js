@@ -1,11 +1,52 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router';
 import '../styles/Header.css';
 
 export default class Header extends Component {
   render() {
     return (
       <div className="Header">
-        <h1>Tereza Venn</h1>
+        <h1 className="header-logo">T Photography</h1>
+        <div className="navbar">
+          <ul>
+            <li className="collection">
+              <Link activeStyle={{color: "#333333"}}
+                activeClassName="highlight" to="/people">
+                people
+              </Link>
+            </li>
+            <li className="collection">
+              <Link activeStyle={{color: "#333333"}}
+                activeClassName="highlight" to="/places">
+                places
+              </Link>
+            </li>
+            <li className="collection">
+              <Link activeStyle={{color: "#333333"}}
+                activeClassName="highlight" to="/life">
+                life
+              </Link>
+            </li>
+            <li className="collection">
+              <Link activeStyle={{color: "#333333"}}
+                activeClassName="highlight" to="/art">
+                art
+              </Link>
+            </li>
+            <li className="collection">
+              <Link activeStyle={{color: "#333333"}}
+                activeClassName="highlight" to="/crestedbutte">
+                crested butte
+              </Link>
+            </li>
+            <li className="collection">
+              <Link activeStyle={{color: "#333333"}}
+                activeClassName="highlight" to="/about">
+                about
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
     )
   }

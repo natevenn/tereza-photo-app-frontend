@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
 import '../styles/Image.css';
 
+
 export default class Picture extends Component {
+  componentDidMount() {
+    var img = this.img
+    if(this.isPortrait(img)) {
+      this.imgWidth.style.width = "300px"
+    }
+  }
+
+  isPortrait(img) {
+    var w = img.naturalWidth || img.width
+    var h = img.naturalHeight || img.height
+    return (h > w)
+  }
+
   render() {
     return (
-      <div className="img-div">
-        <img className="img" src={this.props.imageUrl} />
+      <div ref={(width) => this.imgWidth = width} className="img-div">
+        <img ref={(img) => this.img = img} className='img' src={this.props.imageUrl} />
       </div>
     )
   }

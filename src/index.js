@@ -14,6 +14,7 @@ const routes = (
       <Match exactly pattern='/' component={App} />
       <Match pattern='/people' component={App}/>
       <Match pattern='/places' component={App}/>
+      <Match pattern='/life' component={App}/>
       <Match pattern='/art' component={App}/>
       <Match pattern='/crestedbutte' component={App}/>
       <Match pattern='/about' component={About}/>
