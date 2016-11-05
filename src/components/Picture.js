@@ -16,10 +16,15 @@ export default class Picture extends Component {
     return (h > w)
   }
 
+  handleClick() {
+    var key = this.props.imgKey
+    this.props.handleClick(key)
+  }
+
   render() {
     return (
       <div ref={(width) => this.imgWidth = width} className="img-div">
-        <img ref={(img) => this.img = img} className='img' src={this.props.imageUrl} />
+        <img ref={(img) => this.img = img} className='img' src={this.props.imageUrl} onClick={this.handleClick.bind(this)} />
       </div>
     )
   }

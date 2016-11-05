@@ -1,0 +1,33 @@
+.carousel-div {
+  display: inline-block;
+  width: 900px;
+  height: 100%;
+  margin: auto;
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-img {
+  max-width: 100%;
+  height: auto;
+  width: auto;
+}
+
+.right-arrow {
+  display: inline-block;
+  bottom: 320px;
+  left: 50px;
+  position: relative;
+  background: transparent;
+  border: none;
+  width: 60px;
+  height: 107px;
+  font-size: 83px;
+  color: #999;
+  outline: none;
+}
+
+.right-arrow:hover {
+  color: #333333;
+}
+

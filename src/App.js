@@ -16,12 +16,10 @@ export default class App extends Component {
     }
 
     this.addImage = this.addImage.bind(this);
-
   }
 
   componentWillMount() {
     let params = this.props.pathname
-    console.log('params', params)
     let dbRef = database.ref('pictures' + params)
     dbRef.once('value').then((snapshot) => {
       this.setState({images: snapshot.val()})
