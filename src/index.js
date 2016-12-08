@@ -6,6 +6,7 @@ import App from './App';
 import About from './components/About';
 import UploadImage from './components/UploadImage';
 import NotFound from './components/NotFound';
+import Signin from './components/Signin';
 import './styles/index.css';
 
 const routes = (
@@ -18,7 +19,7 @@ const routes = (
       <Match pattern='/art' component={App}/>
       <Match pattern='/crestedbutte' component={App}/>
       <Match pattern='/about' component={About}/>
-      <Match pattern='/login' component={UploadImage}/>
+      <Match pattern='/login' component={Signin}/>
       <Miss component={NotFound} />
     </div>
   </BrowserRouter>

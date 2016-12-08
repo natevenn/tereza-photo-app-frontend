@@ -4,24 +4,21 @@ import Header from './Header';
 import '../styles/admin.css';
 
 const storageRef = fb.storage().ref();
-const database = fb.database();
 
 export default class UploadImage extends Component {
-
+  constructor() {
+    super()
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
   handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
     var file = this.imageUpload.files[0]
     var group = this.groupName.value
     var imageRef = storageRef.child(file.name)
-    var dbRef = database.ref('pictures/' + group )
     imageRef.put(file).then((snapshot) => {
       var url = snapshot.a.downloadURLs[0]
-      var newImageRef = dbRef.push()
-      var newImageRefKey = dbRef.push().key
-      newImageRef.set({
-        imageUrl: url
-      })
-      //this.props.addImage(newImageRefKey, url)
+      console.log('url', url);
+      //send url to database
     })
 
     this.imageUpload.value = ""
@@ -40,7 +37,7 @@ export default class UploadImage extends Component {
             <option value="places">places</option>
             <option value="art">art</option>
           </select>
-          <input onClick={this.handleSubmit.bind(this)} type='submit' />
+          <input onClick={this.handleSubmit} type='submit' />
         </form>
       </div>
     )

@@ -5,8 +5,6 @@ import Pictures from './components/Pictures';
 import fb from './firebase';
 import './styles/App.css';
 
-const database = fb.database();
-
 export default class App extends Component {
   constructor() {
     super()
@@ -20,10 +18,6 @@ export default class App extends Component {
 
   componentWillMount() {
     let params = this.props.pathname
-    let dbRef = database.ref('pictures' + params)
-    dbRef.once('value').then((snapshot) => {
-      this.setState({images: snapshot.val()})
-    })
   }
 
   addImage(key, url) {
