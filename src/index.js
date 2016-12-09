@@ -19,7 +19,7 @@ const routes = (
       <Match pattern='/art' component={App}/>
       <Match pattern='/crestedbutte' component={App}/>
       <Match pattern='/about' component={About}/>
-      <Match pattern='/login' component={Signin}/>
+      <Match pattern='/login' component={App}/>
       <Miss component={NotFound} />
     </div>
   </BrowserRouter>
