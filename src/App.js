@@ -18,6 +18,7 @@ export default class App extends Component {
     }
 
     this.addImage = this.addImage.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   componentWillMount() {
@@ -35,6 +36,12 @@ export default class App extends Component {
     this.setState({images: this.state.images})
   }
 
+  handleLogout() {
+    localStorage.removeItem('username')
+    localStorage.removeItem('token')
+    this.setState({username: '', userToken: ''})
+  }
+
   render() {
   if (this.props.pathname == '/login') {
     return (
@@ -43,7 +50,7 @@ export default class App extends Component {
     } else {
       return (
         <div className="App">
-          <Header user={this.state.username} />
+          <Header user={this.state.username} token={this.state.userToken} handleLogout={this.handleLogout} />
           <Pictures images={this.state.images} username={this.state.username} userToken={this.state.userToken} />
         </div>
       );

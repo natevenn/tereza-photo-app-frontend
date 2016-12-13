@@ -44,3 +44,8 @@ a:hover, a:active {
 .highlight {
   border-bottom: 1px solid #333333;
 }
+
+.logout {
+  position: absolute;
+  right: 130px;
+}

@@ -4,7 +4,16 @@ import '../styles/Header.css';
 import watermark from '../styles/images/t-watermark3.png'
 
 export default class Header extends Component {
+
   render() {
+    if(this.props.user && this.props.token){
+    var logout =
+        <Link onClick={this.props.handleLogout} className="logout" activeStyle={{color: "#333333"}}
+          activeClassName="highlight" to="#">
+          Logout
+        </Link>
+    }
+
     return (
       <div className="Header">
         <img src={watermark} className="header-logo" />
@@ -48,6 +57,7 @@ export default class Header extends Component {
             </li>
           </ul>
         </div>
+        {logout}
       </div>
     )
   }
