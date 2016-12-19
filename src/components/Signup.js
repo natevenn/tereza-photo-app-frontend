@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
-import '../styles/signin.css';
+import '../styles/signup.css';
+
 const signinRequest = "http://127.0.0.1:8080/api/v1/signup"
 
 export default class Signin extends Component {
   constructor() {
     super()
 
-    //this.state = { username : '', userToken : '' }
+    this.state = { errorMessage : null}
 
     this.handleSubmit = this.handleSubmit.bind(this)
   }
+
   handleSubmit(e) {
     e.preventDefault();
-
-    setUser= setUser.bind(this)
+    setUser = setUser.bind(this)
+    handleErrorMessage = handleErrorMessage.bind(this)
 
     var data = JSON.stringify({username: this.uname.value, password: this.pwd.value});
 
@@ -34,8 +36,8 @@ export default class Signin extends Component {
           setUser(data)
         }
         else {
-          console.log(data['errorMessage'])
-          //handle errorMassage
+          console.log(data['errorMessage']);
+          handleErrorMessage(data['errorMessage'])
         }
       }).catch(function(e) {
         console.log(e)
@@ -45,16 +47,24 @@ export default class Signin extends Component {
     function setUser(data) {
       localStorage.setItem('username', data['username'])
       localStorage.setItem('token', data['token'])
-      //this.props.onUserSignin(data)
       this.context.router.transitionTo('/');
     }
 
-   this.uname.value = '';
-   this.pwd.value = '';
+   function handleErrorMessage(err) {
+      this.setState({ errorMessage: err });
+    }
+
+    this.uname.value = '';
+    this.pwd.value = '';
   }
 
-
   render() {
+    if(this.state.errorMessage) {
+      var errorMessage =
+        <div className='signupAlert'>
+          {this.state.errorMessage}
+        </div>
+    }
     return (
       <div className='container'>
         <label for="">Username</label>
@@ -62,6 +72,7 @@ export default class Signin extends Component {
         <label for="">Password</label>
         <input ref={(pwd) => this.pwd = pwd} className='pwd' type="password" placeholder="Enter Password" required />
         <button onClick={this.handleSubmit}>Create Account</button>
+        {errorMessage}
       </div>
     )
   }

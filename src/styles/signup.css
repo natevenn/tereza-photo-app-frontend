@@ -24,6 +24,12 @@ button {
     width: 100%;
 }
 
+.signupAlert {
+  text-align: center;
+  color: red;
+  font-size: larger;
+  margin-top: 10px;
+}
 
 /* Center the avatar image inside this container */
 .imgcontainer {

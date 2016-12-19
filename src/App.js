@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import UploadImage from './components/UploadImage';
 import Pictures from './components/Pictures';
-import Signin from './components/Signin';
+import Signup from './components/Signup';
 import fb from './firebase';
 import './styles/App.css';
 
@@ -23,11 +23,12 @@ export default class App extends Component {
 
   componentWillMount() {
     //let params = this.props.pathname
-    const userRef = localStorage.getItem('username')
-    const userTokenRef = localStorage.getItem('token')
+    //this.fetchImages();
+    const userRef = localStorage.getItem('username');
+    const userTokenRef = localStorage.getItem('token');
 
     if(userRef && userTokenRef) {
-      this.setState({username: userRef, userToken: userTokenRef})
+      this.setState({username: userRef, userToken: userTokenRef});
     }
   }
 
@@ -43,9 +44,9 @@ export default class App extends Component {
   }
 
   render() {
-  if (this.props.pathname == '/login') {
+  if (this.props.pathname == '/signup') {
     return (
-      <Signin />
+      <Signup />
     )
     } else {
       return (
