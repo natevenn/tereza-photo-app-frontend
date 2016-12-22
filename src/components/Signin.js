@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import '../styles/signup.css';
 
-const signinRequest = "http://127.0.0.1:8080/api/v1/signup"
+const signinRequest = "http://127.0.0.1:8080/api/v1/"
+var path = 'login'
 
 export default class Signin extends Component {
   constructor() {
     super()
 
-    this.state = { errorMessage : null}
+    this.state = {
+      errorMessage : null,
+      isNewUser: false,
+    }
 
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleNewAccount = this.handleNewAccount.bind(this)
+    this.handleExistingAccount = this.handleExistingAccount.bind(this)
   }
 
   handleSubmit(e) {
@@ -22,7 +28,7 @@ export default class Signin extends Component {
     getUserToken(data)
 
     function getUserToken(data) {
-      fetch(signinRequest, {
+      fetch(signinRequest + path, {
         method: "POST",
         headers: {
           "Accept": "application/json",
@@ -58,20 +64,41 @@ export default class Signin extends Component {
     this.pwd.value = '';
   }
 
+  handleNewAccount() {
+    this.setState({isNewUser: true})
+  }
+
+  handleExistingAccount() {
+    this.setState({isNewUser: false})
+  }
+
   render() {
+
+    var header = <h1 className='loginHeader'>Log in</h1>
+    var button = <button onClick={this.handleSubmit}>Log In</button>
+    var linkToNewAccount = <a className='signinOrSignup' href='#' onClick={this.handleNewAccount}>or Create a new account</a>
+
     if(this.state.errorMessage) {
       var errorMessage =
         <div className='signupAlert'>
           {this.state.errorMessage}
         </div>
     }
+    if(this.state.isNewUser) {
+      path = 'signup'
+      header = <h2 className='loginHeader'>Create a new account</h2>
+      button = <button onClick={this.handleSubmit}>Sign up</button>
+      linkToNewAccount = <a className='signinOrSignup' href='#' onClick={this.handleExistingAccount}>or Log in</a>
+    }
     return (
       <div className='container'>
-        <label for="">Username</label>
+        { header }
+        <label className='userLogin' for="">Username</label>
         <input ref={(uname) => this.uname = uname} className='uname' type="text" placeholder="Enter Username" required />
-        <label for="">Password</label>
+        <label className='passwordLogin' for="">Password</label>
         <input ref={(pwd) => this.pwd = pwd} className='pwd' type="password" placeholder="Enter Password" required />
-        <button onClick={this.handleSubmit}>Create Account</button>
+        { button }
+        { linkToNewAccount }
         {errorMessage}
       </div>
     )

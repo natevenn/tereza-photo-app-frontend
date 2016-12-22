@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import UploadImage from './components/UploadImage';
 import Pictures from './components/Pictures';
-import Signup from './components/Signup';
+import Signin from './components/Signin';
 import fb from './firebase';
 import './styles/App.css';
 
@@ -44,9 +44,9 @@ export default class App extends Component {
   }
 
   render() {
-  if (this.props.pathname == '/signup') {
+  if (this.props.pathname == '/signin') {
     return (
-      <Signup />
+      <Signin />
     )
     } else {
       return (

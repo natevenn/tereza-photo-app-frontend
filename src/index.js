@@ -6,7 +6,7 @@ import App from './App';
 import About from './components/About';
 import UploadImage from './components/UploadImage';
 import NotFound from './components/NotFound';
-import Signin from './components/Signup';
+import Signin from './components/Signin';
 import './styles/index.css';
 
 const routes = (
@@ -19,7 +19,7 @@ const routes = (
       <Match pattern='/art' component={App}/>
       <Match pattern='/crestedbutte' component={App}/>
       <Match pattern='/about' component={About}/>
-      <Match pattern='/signup' component={App}/>
+      <Match pattern='/signin' component={App}/>
       <Match pattern='/login' component={App}/>
       <Miss component={NotFound} />
     </div>

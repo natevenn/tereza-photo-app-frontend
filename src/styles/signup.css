@@ -3,6 +3,10 @@ form {
     border: 3px solid #f1f1f1;
 }
 
+form, label {
+  font-size: large;
+}
+
 /* Full-width inputs */
 input[type=text], input[type=password] {
     width: 100%;
@@ -21,7 +25,9 @@ button {
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 100%;
+    width: 30%;
+    font-size: large;
+    float: right;
 }
 
 .signupAlert {
