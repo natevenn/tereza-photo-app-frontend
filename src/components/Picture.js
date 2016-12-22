@@ -18,7 +18,7 @@ export default class Picture extends Component {
 
   handleClick() {
     var key = this.props.imgKey
-    this.props.handleClick(key)
+    this.props.handlePictureClick(key)
   }
 
   render() {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Picture from './Picture';
 import Carousel from './Carousel';
+import ImageUploader from './ImageUploader';
 
 export default class Pictures extends Component {
   constructor() {
@@ -12,11 +13,11 @@ export default class Pictures extends Component {
       imageUrl: ''
     }
 
-  this.handleClick = this.handleClick.bind(this)
+  this.handlePictureClick = this.handlePictureClick.bind(this)
   this.getNextImage = this.getNextImage.bind(this)
   }
 
-  handleClick(key) {
+  handlePictureClick(key) {
     var images = this.props.images
     var imgKeys = Object.keys(images)
     var index = imgKeys.indexOf(key)
@@ -37,6 +38,9 @@ export default class Pictures extends Component {
   render() {
     var imgKeys = Object.keys(this.props.images)
 
+    if(this.props.username && this.props.userToken){
+      var imageUploader = <ImageUploader location={this.props.location} />
+    }
     if(this.state.isClicked) {
       return (
         <Carousel imageUrl={this.state.imageUrl} getNextImage={this.getNextImage}/>
@@ -45,11 +49,16 @@ export default class Pictures extends Component {
 
     return (
       <div>
+        { imageUploader }
         {imgKeys.map((key) => {
           var imageUrl = this.props.images[key].imageUrl
-          return <Picture handleClick={this.handleClick} key={key} imgKey={key} imageUrl={imageUrl} />
+          return <Picture handlePictureClick={this.handlePictureClick} key={key} imgKey={key} imageUrl={imageUrl} />
           })}
       </div>
     )
   }
+}
+
+Picture.contextTypes = {
+  router: React.PropTypes.object
 }

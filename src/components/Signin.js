@@ -86,7 +86,7 @@ export default class Signin extends Component {
     }
     if(this.state.isNewUser) {
       path = 'signup'
-      header = <h2 className='loginHeader'>Create a new account</h2>
+      header = <h1 className='loginHeader'>Create a new account</h1>
       button = <button onClick={this.handleSubmit}>Sign up</button>
       linkToNewAccount = <a className='signinOrSignup' href='#' onClick={this.handleExistingAccount}>or Log in</a>
     }

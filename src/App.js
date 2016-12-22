@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
-import UploadImage from './components/UploadImage';
 import Pictures from './components/Pictures';
 import Signin from './components/Signin';
 import fb from './firebase';
@@ -52,7 +51,7 @@ export default class App extends Component {
       return (
         <div className="App">
           <Header user={this.state.username} token={this.state.userToken} handleLogout={this.handleLogout} />
-          <Pictures images={this.state.images} username={this.state.username} userToken={this.state.userToken} />
+          <Pictures location={location.pathname} images={this.state.images} username={this.state.username} userToken={this.state.userToken} />
         </div>
       );
     }

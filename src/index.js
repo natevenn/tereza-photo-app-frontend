@@ -4,7 +4,6 @@ import { BrowserRouter, Match, Miss } from 'react-router';
 
 import App from './App';
 import About from './components/About';
-import UploadImage from './components/UploadImage';
 import NotFound from './components/NotFound';
 import Signin from './components/Signin';
 import './styles/index.css';
@@ -20,7 +19,6 @@ const routes = (
       <Match pattern='/crestedbutte' component={App}/>
       <Match pattern='/about' component={About}/>
       <Match pattern='/signin' component={App}/>
-      <Match pattern='/login' component={App}/>
       <Miss component={NotFound} />
     </div>
   </BrowserRouter>
