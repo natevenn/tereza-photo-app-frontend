@@ -16,7 +16,7 @@ export default class Header extends Component {
 
     return (
       <div className="Header">
-        <img src={watermark} className="header-logo" />
+        <img src={watermark} role='presentation' className="header-logo" />
         <div className="navbar">
           <ul>
             <li className="collection">

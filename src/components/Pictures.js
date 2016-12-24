@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Picture from './Picture';
 import Carousel from './Carousel';
-import ImageUploader from './ImageUploader';
 
 export default class Pictures extends Component {
   constructor() {
@@ -35,12 +34,14 @@ export default class Pictures extends Component {
     this.setState({currentIndex: index, imageUrl: imageUrl})
   }
 
+  startsWithHttp(imageUrl) {
+    var regex = new RegExp(/^http/)
+    return regex.test(imageUrl)
+  }
+
   render() {
     var imgKeys = Object.keys(this.props.images)
 
-    if(this.props.username && this.props.userToken){
-      var imageUploader = <ImageUploader location={this.props.location} />
-    }
     if(this.state.isClicked) {
       return (
         <Carousel imageUrl={this.state.imageUrl} getNextImage={this.getNextImage}/>
@@ -49,11 +50,12 @@ export default class Pictures extends Component {
 
     return (
       <div>
-        { imageUploader }
         {imgKeys.map((key) => {
           var imageUrl = this.props.images[key].imageUrl
-          return <Picture handlePictureClick={this.handlePictureClick} key={key} imgKey={key} imageUrl={imageUrl} />
-          })}
+          if(this.startsWithHttp(imageUrl)) {
+            return <Picture handlePictureClick={this.handlePictureClick} key={key} imgKey={key} imageUrl={imageUrl} />
+            }
+        })}
       </div>
     )
   }

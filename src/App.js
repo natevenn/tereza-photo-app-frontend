@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import Header from './components/Header';
 import Pictures from './components/Pictures';
 import Signin from './components/Signin';
-import fb from './firebase';
 import './styles/App.css';
-
+import ImageUploader from './components/ImageUploader';
 
 export default class App extends Component {
   constructor() {
@@ -18,22 +17,38 @@ export default class App extends Component {
 
     this.addImage = this.addImage.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
+    this.getImages = this.getImages.bind(this);
   }
 
   componentWillMount() {
-    //let params = this.props.pathname
-    //this.fetchImages();
     const userRef = localStorage.getItem('username');
     const userTokenRef = localStorage.getItem('token');
+    this.getImages();
 
     if(userRef && userTokenRef) {
       this.setState({username: userRef, userToken: userTokenRef});
     }
   }
 
-  addImage(key, url) {
-    this.state.images[key] = { imageUrl: url }
-    this.setState({images: this.state.images})
+  getImages() {
+    let params = this.props.pathname
+    var api = 'http://127.0.0.1:8080/api/v1/terezavenn' + params + '/images'
+    setImagesToState = setImagesToState.bind(this);
+
+    fetch(api, {
+      method: 'get'
+    }).then(function(response) {
+      return response.json();
+    }).then( (data) => {
+      console.log('data', data)
+      setImagesToState(data)
+    }).catch(function(err) {
+      console.log(err)
+    });
+
+    function setImagesToState(images) {
+      this.setState({images: images});
+    }
   }
 
   handleLogout() {
@@ -42,16 +57,27 @@ export default class App extends Component {
     this.setState({username: '', userToken: ''})
   }
 
+  addImage(imageUrl) {
+    var newState = this.state.images
+    newState.push(imageUrl)
+    this.setState({images: newState})
+  }
+
   render() {
-  if (this.props.pathname == '/signin') {
-    return (
-      <Signin />
-    )
+    if(this.state.username && this.state.userToken){
+      var imageUploader = <ImageUploader username={this.state.username} userToken={this.state.userToken} location={location.pathname} addImage={this.addImage} />
+    }
+
+    if (this.props.pathname === '/signin') {
+      return (
+        <Signin />
+      )
     } else {
       return (
         <div className="App">
           <Header user={this.state.username} token={this.state.userToken} handleLogout={this.handleLogout} />
-          <Pictures location={location.pathname} images={this.state.images} username={this.state.username} userToken={this.state.userToken} />
+          { imageUploader }
+          <Pictures images={this.state.images} location={location.pathname} />
         </div>
       );
     }

@@ -5,7 +5,6 @@ import { BrowserRouter, Match, Miss } from 'react-router';
 import App from './App';
 import About from './components/About';
 import NotFound from './components/NotFound';
-import Signin from './components/Signin';
 import './styles/index.css';
 
 const routes = (
