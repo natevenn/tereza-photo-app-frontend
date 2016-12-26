@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../styles/Image.css';
 
-
 export default class Picture extends Component {
   componentDidMount() {
     var img = this.img
@@ -21,10 +20,15 @@ export default class Picture extends Component {
     this.props.handlePictureClick(key)
   }
 
+  handleDelete() {
+    this.props.deleteImage(this.props.imageId)
+  }
+
   render() {
     return (
       <div ref={(width) => this.imgWidth = width} className="img-div">
         <img ref={(img) => this.img = img} className='img' src={this.props.imageUrl} role='presentation' onClick={this.handleClick.bind(this)} />
+        <button className='deleteImage' onClick={this.handleDelete.bind(this)}>Delete</button>
       </div>
     )
   }

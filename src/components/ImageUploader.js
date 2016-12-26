@@ -3,6 +3,7 @@ import fb from '../firebase';
 import '../styles/admin.css';
 
 const storageRef = fb.storage().ref();
+const apiRequest = 'http://127.0.0.1:8080/api/v1/images'
 
 export default class ImageUploader extends Component {
   constructor() {
@@ -19,16 +20,24 @@ export default class ImageUploader extends Component {
 
     imageRef.put(file).then((snapshot) => {
       var url = snapshot.a.downloadURLs[0]
-      var data = JSON.stringify({username: this.props.username, collection: collection, url: url, token: this.props.userToken});
+      var data = JSON.stringify({
+        username: this.props.username,
+        collection: collection,
+        url: url,
+        token: this.props.userToken
+      });
 
-      fetch('http://127.0.0.1:8080/api/v1/images', {
+      var PostImageRequest = new Request(apiRequest, {
         method: "POST",
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/json"
         },
         body: data
-      }).then(function(response) {
+      })
+
+      fetch(PostImageRequest
+      ).then(function(response) {
         return response.json();
       }).then(function(data) {
         updateState(data)

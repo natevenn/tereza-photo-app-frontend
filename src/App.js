@@ -18,6 +18,7 @@ export default class App extends Component {
     this.addImage = this.addImage.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.getImages = this.getImages.bind(this);
+    this.deleteImage = this.deleteImage.bind(this);
   }
 
   componentWillMount() {
@@ -40,7 +41,6 @@ export default class App extends Component {
     }).then(function(response) {
       return response.json();
     }).then( (data) => {
-      console.log('data', data)
       setImagesToState(data)
     }).catch(function(err) {
       console.log(err)
@@ -48,6 +48,32 @@ export default class App extends Component {
 
     function setImagesToState(images) {
       this.setState({images: images});
+    }
+  }
+
+  deleteImage(imageId) {
+    renderDeleteMessage = renderDeleteMessage.bind(this);
+
+    var data = {
+      token: this.state.userToken
+    }
+
+    fetch('http://127.0.0.1:8080/api/v1/images/' + imageId, {
+      method: 'DELETE',
+      body: data
+    })
+    .then( (res) => {
+      return res.json()
+    })
+    .then( (data) => {
+      renderDeleteMessage(data)
+    })
+    .catch( (err) => {
+      console.log('error', err)
+    })
+
+    function renderDeleteMessage(msg) {
+      this.componentWillMount();
     }
   }
 
@@ -64,6 +90,7 @@ export default class App extends Component {
   }
 
   render() {
+
     if(this.state.username && this.state.userToken){
       var imageUploader = <ImageUploader username={this.state.username} userToken={this.state.userToken} location={location.pathname} addImage={this.addImage} />
     }
@@ -77,7 +104,7 @@ export default class App extends Component {
         <div className="App">
           <Header user={this.state.username} token={this.state.userToken} handleLogout={this.handleLogout} />
           { imageUploader }
-          <Pictures images={this.state.images} location={location.pathname} />
+          <Pictures images={this.state.images} location={location.pathname} deleteImage={this.deleteImage} />
         </div>
       );
     }
