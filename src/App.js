@@ -102,9 +102,17 @@ export default class App extends Component {
     } else {
       return (
         <div className="App">
-          <Header user={this.state.username} token={this.state.userToken} handleLogout={this.handleLogout} />
+          <Header user={this.state.username}
+            token={this.state.userToken}
+            handleLogout={this.handleLogout}
+          />
           { imageUploader }
-          <Pictures images={this.state.images} location={location.pathname} deleteImage={this.deleteImage} />
+          <Pictures images={this.state.images}
+            userToken={this.state.userToken}
+            username={this.state.username}
+            location={location.pathname}
+            deleteImage={this.deleteImage}
+          />
         </div>
       );
     }

@@ -1,5 +1,6 @@
 .img-div {
   display: inline-block;
+  position: relative;
   border: 1px solid #ECEDE8;
   margin: 30px 30px;
   overflow: hidden;
@@ -11,4 +12,17 @@
   max-width: 100%;
   height: auto;
   width: auto\9;
+}
+
+.deleteImage {
+  background: white;
+  border: none;
+  border-radius: 5px;
+  color: #999;
+  cursor: pointer;
+  opacity: .7;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 10%;
 }

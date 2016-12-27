@@ -25,10 +25,18 @@ export default class Picture extends Component {
   }
 
   render() {
+    if(this.props.username && this.props.userToken) {
+      var button = <a className='deleteImage' onClick={this.handleDelete.bind(this)}>X</a>
+    }
+
     return (
       <div ref={(width) => this.imgWidth = width} className="img-div">
-        <img ref={(img) => this.img = img} className='img' src={this.props.imageUrl} role='presentation' onClick={this.handleClick.bind(this)} />
-        <button className='deleteImage' onClick={this.handleDelete.bind(this)}>Delete</button>
+        <img ref={(img) => this.img = img}
+          className='img' src={this.props.imageUrl}
+          role='presentation'
+          onClick={this.handleClick.bind(this)}
+        />
+        {button}
       </div>
     )
   }
