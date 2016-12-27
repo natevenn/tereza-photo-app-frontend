@@ -1,3 +1,7 @@
+.outer-carousel-div {
+  display: inline-block;
+  position: relative;
+}
 .carousel-div {
   display: inline-block;
   width: 900px;
@@ -5,6 +9,7 @@
   margin: auto;
   position: relative;
   overflow: hidden;
+  vertical-align: top;
 }
 
 .carousel-img {
@@ -14,20 +19,47 @@
 }
 
 .right-arrow {
-  display: inline-block;
-  bottom: 320px;
-  left: 50px;
-  position: relative;
+  position: absolute;
   background: transparent;
   border: none;
-  width: 60px;
-  height: 107px;
   font-size: 83px;
-  color: #999;
+  top: 50%;
+  right: 10px;
+  color: white;
   outline: none;
+  opacity: .6;
+  cursor: pointer;
 }
 
-.right-arrow:hover {
-  color: #333333;
+a:hover {
+  color: white;
+  opacity: .8;
+  text-decoration: none;
+}
+
+.left-arrow {
+  position: absolute;
+  background: transparent;
+  border: none;
+  font-size: 83px;
+  top: 50%;
+  left: 10px;
+  color: white;
+  outline: none;
+  opacity: .6;
+  cursor: pointer;
+}
+
+.exitButton {
+  background: white;
+  border: none;
+  border-radius: 5px;
+  color: #999;
+  cursor: pointer;
+  opacity: .7;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  width: 5%;
 }
 
